@@ -9,21 +9,21 @@ This workflow builds the .NET app as a container and deploys it to Azure App Ser
 
 ## Configure GitHub Secrets
 
-In your repository, go to **Settings > Secrets and variables > Actions** and add these secrets:
+In your repository, go to **Settings > Secrets and variables > Actions > Secrets tab > New repository secret** and add:
 
-| Secret | Description |
-|--------|-------------|
-| `AZURE_CLIENT_ID` | App registration client ID |
-| `AZURE_TENANT_ID` | Azure AD tenant ID |
-| `AZURE_SUBSCRIPTION_ID` | Azure subscription ID |
+| Secret | Description | How to get the value |
+|--------|-------------|----------------------|
+| `AZURE_CLIENT_ID` | App registration (service principal) client ID | After creating the app registration, find it in **Azure Portal > Microsoft Entra ID > App registrations > Your app > Overview > Application (client) ID** |
+| `AZURE_TENANT_ID` | Microsoft Entra ID (Azure AD) tenant ID | Run `az account show --query tenantId -o tsv` or find in **Azure Portal > Microsoft Entra ID > Overview > Tenant ID** |
+| `AZURE_SUBSCRIPTION_ID` | Azure subscription ID | Run `az account show --query id -o tsv` or find in **Azure Portal > Subscriptions > Your subscription > Subscription ID** |
 
 ## Configure GitHub Variables
 
-Under **Settings > Secrets and variables > Actions > Variables**, add:
+Under **Settings > Secrets and variables > Actions > Variables tab > New repository variable**, add:
 
-| Variable | Description |
-|----------|-------------|
-| `AZURE_WEBAPP_NAME` | Name of your Azure Web App (from `azd provision` output: `SERVICE_WEB_NAME`) |
+| Variable | Description | How to get the value |
+|----------|-------------|----------------------|
+| `AZURE_WEBAPP_NAME` | Name of your Azure Web App | Run `azd env get-values` and copy the `SERVICE_WEB_NAME` value, or find in **Azure Portal > App Services > Your app > Name** |
 
 ## Create Azure Federated Credentials
 
