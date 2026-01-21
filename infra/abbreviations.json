@@ -1,0 +1,9 @@
+{
+  "appInsights": "ai-",
+  "appServicePlan": "asp-",
+  "keyVault": "kv-",
+  "logAnalyticsWorkspace": "law-",
+  "resourceGroup": "rg-",
+  "storageAccount": "st",
+  "webApp": "app-"
+}
