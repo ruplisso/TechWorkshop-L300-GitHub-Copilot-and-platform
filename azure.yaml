@@ -1,0 +1,18 @@
+# Azure Developer CLI (azd) configuration file
+# Learn more about azd: https://learn.microsoft.com/azure/developer/azure-developer-cli/
+
+name: zavastorefront
+metadata:
+  template: zavastorefront-appservice
+
+# Azure infrastructure and application configuration
+infra:
+  provider: bicep
+  path: infra
+
+# Service definitions
+services:
+  web:
+    project: ./src
+    language: dotnet
+    host: appservice
