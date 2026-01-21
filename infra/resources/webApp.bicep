@@ -21,7 +21,7 @@ param appInsightsConnectionString string
 param linuxFxVersion string = ''
 
 @description('.NET Framework version (for Windows)')
-param netFrameworkVersion string = 'v6.0'
+param netFrameworkVersion string = 'v8.0'
 
 // ============================================================================
 // Resource
