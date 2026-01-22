@@ -18,11 +18,23 @@ public class HomeController : Controller
         _cartService = cartService;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(decimal? minPrice, decimal? maxPrice)
     {
-        _logger.LogInformation("Loading products page");
-        var products = _productService.GetAllProducts();
-        return View(products);
+        _logger.LogInformation("Loading products page with filters: minPrice={MinPrice}, maxPrice={MaxPrice}", minPrice, maxPrice);
+        
+        var products = _productService.GetFilteredProducts(minPrice, maxPrice);
+        var priceRange = _productService.GetPriceRange();
+
+        var viewModel = new ProductListViewModel
+        {
+            Products = products,
+            MinPrice = minPrice,
+            MaxPrice = maxPrice,
+            PriceRangeMin = priceRange.Min,
+            PriceRangeMax = priceRange.Max
+        };
+
+        return View(viewModel);
     }
 
     [HttpPost]
