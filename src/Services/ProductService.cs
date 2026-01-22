@@ -97,5 +97,29 @@ namespace ZavaStorefront.Services
         {
             return _products.FirstOrDefault(p => p.Id == id);
         }
+
+        public List<Product> GetFilteredProducts(decimal? minPrice, decimal? maxPrice)
+        {
+            var filtered = _products.AsEnumerable();
+
+            if (minPrice.HasValue)
+            {
+                filtered = filtered.Where(p => p.Price >= minPrice.Value);
+            }
+
+            if (maxPrice.HasValue)
+            {
+                filtered = filtered.Where(p => p.Price <= maxPrice.Value);
+            }
+
+            return filtered.ToList();
+        }
+
+        public (decimal Min, decimal Max) GetPriceRange()
+        {
+            var min = _products.Min(p => p.Price);
+            var max = _products.Max(p => p.Price);
+            return (min, max);
+        }
     }
 }
